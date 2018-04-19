@@ -1,9 +1,13 @@
 package com.arydz.learning.analyzer.model;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
-public class TrafficViolations {
+@Builder
+@ToString
+public class TrafficViolations implements Readable {
 
     private String dateOfStop;
     private String timeOfStop;
