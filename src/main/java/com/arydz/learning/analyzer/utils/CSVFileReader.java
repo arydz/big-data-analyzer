@@ -26,23 +26,31 @@ public final class CSVFileReader {
 
     }
 
-    public static <T extends Readable> List<T> mapFile(Path pathWithFileName, RowToPojoMapper<T> mapper) {
+    public static <T extends Readable> List<T> mapFile(Path pathWithFileName, RowToPojoMapper<T> mapper,
+                                                       boolean skipFirstLine) {
         try (FileInputStream fileInputStream = new FileInputStream(pathWithFileName.toFile())) {
             Scanner scanner = new Scanner(fileInputStream, ENCODING.name());
-            return mapRows(scanner, mapper);
+            return mapRows(scanner, mapper, skipFirstLine);
         } catch (IOException e) {
             log.error("Problem with opening file. {}", e.getMessage());
         }
         throw new IllegalArgumentException("Problems with opening file occurs. Check path to file.");
     }
 
-    private static <T extends Readable> List<T> mapRows(Scanner scanner, RowToPojoMapper<T> mapper) {
+    private static <T extends Readable> List<T> mapRows(Scanner scanner, RowToPojoMapper<T> mapper, boolean skipFirstLine) {
         List<T> result = new LinkedList<>();
+        skipFirstLine(scanner, skipFirstLine);
         while (scanner.hasNextLine()) {
             String[] splitLine = CSVFileReader.readSplitLine(scanner);
             result.add(mapper.map(splitLine));
         }
         return result;
+    }
+
+    private static void skipFirstLine(Scanner scanner,boolean skipFirstLine) {
+        if (skipFirstLine && scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
     }
 
     private static String[] readSplitLine(Scanner scanner) {
