@@ -4,3 +4,5 @@ a) Hibernate
     https://github.com/spring-projects/spring-boot/issues/12007
 b) Spring
     http://malsolo.com/blog4java/?p=465
+    https://github.com/springfox/springfox/issues/2155
+    https://github.com/spring-projects/spring-boot/issues/10129
