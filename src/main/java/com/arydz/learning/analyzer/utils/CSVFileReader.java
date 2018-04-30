@@ -16,7 +16,7 @@ import java.util.Scanner;
 @Slf4j
 public final class CSVFileReader {
 
-    private static final String DEFAULT_SEPARATOR = ",";
+    private static final String DEFAULT_REGEX = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
     private static final Charset ENCODING = StandardCharsets.UTF_8;
 
     /**
@@ -55,12 +55,12 @@ public final class CSVFileReader {
 
     private static String[] readSplitLine(Scanner scanner) {
         String line = scanner.nextLine();
-        return line.split(DEFAULT_SEPARATOR);
+        return line.split(DEFAULT_REGEX, -1);
     }
 
-    public static String[] readSplitLine(Scanner scanner, String separator) {
+    public static String[] readSplitLine(Scanner scanner, String regex) {
         String line = scanner.nextLine();
-        return line.split(separator);
+        return line.split(regex, -1);
     }
 
     public static void read(Path pathWithFileName) {

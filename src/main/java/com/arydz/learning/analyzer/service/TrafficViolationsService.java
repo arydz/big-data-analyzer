@@ -1,6 +1,7 @@
 package com.arydz.learning.analyzer.service;
 
 import com.arydz.learning.analyzer.entity.TrafficViolationsEntity;
+import com.arydz.learning.analyzer.model.Readable;
 import com.arydz.learning.analyzer.model.TrafficViolations;
 import com.arydz.learning.analyzer.repository.TrafficViolationsRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +29,14 @@ public class TrafficViolationsService {
         return mapper.mapAsList(trafficViolations, TrafficViolations.class);
     }
 
-    public void save(TrafficViolations trafficViolations) {
+    public void save(Readable trafficViolations) {
         TrafficViolationsEntity trafficViolationsEntity = mapper.map(trafficViolations, TrafficViolationsEntity.class);
         trafficViolationsRepository.saveAndFlush(trafficViolationsEntity);
+    }
+
+    public void saveAll(List<Readable> trafficViolations) {
+        List<TrafficViolationsEntity> trafficViolationsEntity = mapper.mapAsList(trafficViolations, TrafficViolationsEntity.class);
+        trafficViolationsRepository.saveAll(trafficViolationsEntity);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.arydz.learning.analyzer.controller;
 
-import com.arydz.learning.analyzer.model.TrafficViolations;
+import com.arydz.learning.analyzer.model.Readable;
 import com.arydz.learning.analyzer.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +22,12 @@ public class FileController {
     }
 
     @RequestMapping("/analyze")
-    public List<TrafficViolations> mapFiles() {
+    public List<Readable> mapFiles() {
         Path path = Paths.get(System.getProperty("user.home") + "/Pobrane/splited_files/test.csv");
         boolean skipFirstLine = true;
-        return fileService.mapFile(path, skipFirstLine);
+        List<Readable> rows = fileService.mapFile(path, skipFirstLine);
+        fileService.saveFileRows(rows);
+        return rows;
     }
 
 }

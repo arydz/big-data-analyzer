@@ -16,10 +16,12 @@ import java.util.List;
 public class FileService {
 
     private RowToPojoMapper trafficViolationsMapper;
+    private TrafficViolationsService trafficViolationsService;
 
     @Autowired
-    public FileService(TrafficViolationsMapper trafficViolationsMapper) {
+    public FileService(TrafficViolationsMapper trafficViolationsMapper, TrafficViolationsService trafficViolationsService) {
         this.trafficViolationsMapper = trafficViolationsMapper;
+        this.trafficViolationsService = trafficViolationsService;
     }
 
     /**
@@ -28,5 +30,9 @@ public class FileService {
      */
     public <T extends Readable> List<T> mapFile(Path pathWithFileName, boolean skipFirstLine) {
         return CSVFileReader.mapFile(pathWithFileName, trafficViolationsMapper, skipFirstLine);
+    }
+
+    public void saveFileRows(List<Readable> rows) {
+        trafficViolationsService.saveAll(rows);
     }
 }
