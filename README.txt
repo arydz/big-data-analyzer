@@ -6,3 +6,7 @@ b) Spring
     http://malsolo.com/blog4java/?p=465
     https://github.com/springfox/springfox/issues/2155
     https://github.com/spring-projects/spring-boot/issues/10129
+c) Java
+    https://regex101.com/
+    https://stackoverflow.com/questions/1757065/java-splitting-a-comma-separated-string-but-ignoring-commas-in-quotes
+    https://stackoverflow.com/questions/18893390/splitting-on-comma-outside-quotes

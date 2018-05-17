@@ -1,6 +1,7 @@
 package com.arydz.learning.analyzer.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Table
 @Entity
+@Builder
 public class TrafficViolationsEntity {
 
     @Id
